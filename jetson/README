@@ -11,7 +11,7 @@ wifi-Gp.sh and wifi-lcps.sh moved to /root
 tegrastats moved to /usr/bin
 Code directory with active subfolder should be in roboloco home directory
 On TX2, fix two cores being disabled by editing /etc/nvpmodel.conf and changing the default state to 2
-Change IP to a static 10.53.38.75/24 when using the wired ethernet connection using mntui.
+Change IP to a static 10.53.38.75/24 when using the wired ethernet connection using nmtui.
 
 ##Dependencies
 Following commands come from this (site)[https://jkjung-avt.github.io/opencv3-on-tx2/]
