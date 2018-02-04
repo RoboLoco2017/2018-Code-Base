@@ -8,15 +8,15 @@ Thus, if you don't understand something or don't know how to procede, **ask for 
 - A Jetson [TX1](https://elinux.org/Jetson_TX1) or [TX2](https://elinux.org/Jetson_TX2) must fully power on when the power button is pressed.
 - It must be flashed with the Nvidia's [Jetpack SDK](https://developer.nvidia.com/embedded/jetpack), 3.1 for the TX1 or 3.2 for the TX2, to install the base L4T operating system and associated drivers.
 - **If using the** [**Orbitty Carrier Board**](connecttech.com/product/orbitty-carrier-for-nvidia-jetson-tx2-tx1/), the Jetson must be flashed additionally with CTI's [L4T support package](connecttech.com/product/orbitty-carrier-for-nvidia-jetson-tx2-tx1/) to install their specific packages.
-- A user account named `roboloco` must set up on the system using [*adduser*](manpages.ubuntu.com/manpages/xenial/en/man8/adduser.8.html).
-- The account `roboloco` must be a member of sudo and video groups using [*usermod*](manpages.ubuntu.com/manpages/xenial/man8/usermod.8.html).
-- Passwords for `root`, `nvidia`, `ubuntu`, and `roboloco` must be set using [*passwd*](manpages.ubuntu.com/manpages/trusty/man5/passwd.5.html) based on this [link](https://goo.gl/G4gK9V).
-- IP must be changed to be a static `10.53.38.75/24` for only the wired `eth0` connection using [*nmtui*](manpages.ubuntu.com/manpages/xenial/en/man1/nmtui.1.html).
+- A user account named `roboloco` must set up on the system using [*adduser*](https://manpages.ubuntu.com/manpages/xenial/en/man8/adduser.8.html).
+- The account `roboloco` must be a member of sudo and video groups using [*usermod*](https://manpages.ubuntu.com/manpages/xenial/man8/usermod.8.html).
+- Passwords for `root`, `nvidia`, `ubuntu`, and `roboloco` must be set using [*passwd*](https://manpages.ubuntu.com/manpages/trusty/man5/passwd.5.html) based on this [link](https://goo.gl/G4gK9V).
+- IP must be changed to be a static `10.53.38.75/24` for only the wired `eth0` connection using [*nmtui*](https://manpages.ubuntu.com/manpages/xenial/en/man1/nmtui.1.html).
 - (TX1 ONLY) All home directories should be set up on the external SD card using [these commands](https://help.ubuntu.com/community/Partitioning/Home/Moving).
-- (TX2 ONLY) Enable the two disabled cores by editing `/etc/nvpmodel.conf` and changing the default state to `0` using, as sudo, [*vi*](manpages.ubuntu.com/manpages/xenial/en/man1/vi.1posix.html).
+- (TX2 ONLY) Enable the two disabled cores by editing `/etc/nvpmodel.conf` and changing the default state to `0` using, as sudo, [*vi*](https://manpages.ubuntu.com/manpages/xenial/en/man1/vi.1posix.html).
 <!--- Check if above statement is actually true and edit to actually match the line number and provide entire line--->
-- The `tegrastats` command should be copied from the `nvidia` home directory to `/usr/bin` using, as sudo, [*cp*](manpages.ubuntu.com/manpages/xenial/man1/cp.1.html).
-- The `wifi-Gp.sh` and `wifi-lcps.sh` scripts should be moved into `/root` using, as sudo, [*mv*](manpages.ubuntu.com/manpages/xenial/man1/mv.1.html).
+- The `tegrastats` command should be copied from the `nvidia` home directory to `/usr/bin` using, as sudo, [*cp*](https://manpages.ubuntu.com/manpages/xenial/man1/cp.1.html).
+- The `wifi-Gp.sh` and `wifi-lcps.sh` scripts should be moved into `/root` using, as sudo, [*mv*](https://manpages.ubuntu.com/manpages/xenial/man1/mv.1.html).
 - roboloco.service moved to /lib/systemd/system
 - Activate systemd changes using systemctl daemon-reload
 - Enable service on boot using systemctl enable roboloco
