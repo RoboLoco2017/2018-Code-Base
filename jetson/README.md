@@ -13,11 +13,11 @@ Thus, if you don't understand something or don't know how to procede, **ask for 
 - Passwords for `root`, `nvidia`, `ubuntu`, and `roboloco` must be set using [*passwd*](https://manpages.ubuntu.com/manpages/trusty/man5/passwd.5.html) based on this [link](https://goo.gl/G4gK9V).
 - IP must be changed to be a static `10.53.38.75/24` for only the wired `eth0` connection using [*nmtui*](https://manpages.ubuntu.com/manpages/xenial/en/man1/nmtui.1.html).
 - (TX1 ONLY) All home directories should be set up on the external SD card using [these commands](https://help.ubuntu.com/community/Partitioning/Home/Moving).
-- (TX2 ONLY) Enable the two disabled cores by editing `/etc/nvpmodel.conf` and changing the default state to `0` using, as sudo, [*vi*](https://manpages.ubuntu.com/manpages/xenial/en/man1/vi.1posix.html).
+- (TX2 ONLY) Enable the two disabled cores by editing `/etc/nvpmodel.conf` and changing the `< PM_CONFIG DEFAULT >` line to to `< PM_CONFIG DEFAULT=0 >` using, as sudo, [*vi*](https://manpages.ubuntu.com/manpages/xenial/en/man1/vi.1posix.html).
 <!--- Check if above statement is actually true and edit to actually match the line number and provide entire line--->
 - The `tegrastats` command should be copied from the `nvidia` home directory to `/usr/bin` using, as sudo, [*cp*](https://manpages.ubuntu.com/manpages/xenial/man1/cp.1.html).
 - The `wifi-Gp.sh` and `wifi-lcps.sh` scripts should be moved into `/root` using, as sudo, [*mv*](https://manpages.ubuntu.com/manpages/xenial/man1/mv.1.html).
-- roboloco.service moved to /lib/systemd/system
+- The `roboloco.service` script should be moved into `/lib/systemd/system` using, as sudo, [*mv*](https://manpages.ubuntu.com/manpages/xenial/man1/mv.1.html).
 - Activate systemd changes using systemctl daemon-reload
 - Enable service on boot using systemctl enable roboloco
 - Code directory with active subfolder should be in roboloco home directory
