@@ -1,22 +1,31 @@
-## Operating System Setup
-- A Jetson TX1 or TX2 that fully powers on.
-- It flashed with the [latest L4T OS](https://developer.nvidia.com/embedded/jetpack), 3.1 or higher, and associated drivers from Nvidia based on their instructions.
-- **If** using the [Orbitty Carrier Board](connecttech.com/product/orbitty-carrier-for-nvidia-jetson-tx2-tx1/), follow the instructions in their [L4T support package](connecttech.com/product/orbitty-carrier-for-nvidia-jetson-tx2-tx1/) to install the specific packages needed.
-- A user account named roboloco set up on the system using [*adduser*](manpages.ubuntu.com/manpages/xenial/en/man8/adduser.8.html).
-- roboloco has access as a member of sudo and video groups using [*usermod*](manpages.ubuntu.com/manpages/xenial/man8/usermod.8.html).
-- Passwords for root, nvidia, ubuntu, and roboloco set using [*passwd*](manpages.ubuntu.com/manpages/trusty/man5/passwd.5.html) based on this [link](https://goo.gl/G4gK9V).
-- IP changed to be a static 10.53.38.75/24 for the wired eth0 connection only using [*nmtui*](manpages.ubuntu.com/manpages/xenial/en/man1/nmtui.1.html).
+## Rules of Thumb
+---
+The following instructions are somewhat complex and assume some Linux and Jetson familiarity.
+They are general guidelines and not all the details are listed in any particular steps.
+There are harmful consequences if some of these steps are done incorrectly, including overwriting good work or damaging the operating system.
+Thus, if you don't understand something or don't know how to procede, **ask for help** from someone else or a mentor!
 
-- SD card as a home directory for TX1, ext4 formatted, or using onboard storage on TX2.
+## Operating System Setup
+---
+- A Jetson [TX1](https://elinux.org/Jetson_TX1) or [TX2](https://elinux.org/Jetson_TX2) must fully power on when the power button is pressed.
+- It must be flashed with the Nvidia's [Jetpack SDK](https://developer.nvidia.com/embedded/jetpack), 3.1 for the TX1 or 3.2 for the TX2, to install the base L4T operating system and associated drivers.
+- **If using the [Orbitty Carrier Board]**(connecttech.com/product/orbitty-carrier-for-nvidia-jetson-tx2-tx1/), the Jetson must be flashed additionally with CTI's [L4T support package](connecttech.com/product/orbitty-carrier-for-nvidia-jetson-tx2-tx1/) to install their specific packages.
+- A user account named `roboloco` must set up on the system using [*adduser*](manpages.ubuntu.com/manpages/xenial/en/man8/adduser.8.html).
+- The account `roboloco` must be a member of sudo and video groups using [*usermod*](manpages.ubuntu.com/manpages/xenial/man8/usermod.8.html).
+- Passwords for `root`, `nvidia`, `ubuntu`, and `roboloco` must be set using [*passwd*](manpages.ubuntu.com/manpages/trusty/man5/passwd.5.html) based on this [link](https://goo.gl/G4gK9V).
+- IP must be changed to be a static `10.53.38.75/24` for only the wired `eth0` connection using [*nmtui*](manpages.ubuntu.com/manpages/xenial/en/man1/nmtui.1.html).
+- (TX1 ONLY) The home directories should be set on the external SD card using [these commands](https://help.ubuntu.com/community/Partitioning/Home/Moving).
+- (TX2 ONLY) Enable the two disabled cores by editing `/etc/nvpmodel.conf` and changing the default state to `0` using [*vi*](manpages.ubuntu.com/manpages/xenial/en/man1/vi.1posix.html).
+<!--- Check if above statement is actually true and edit to actually match the line number and provide entire line--->
+- The `tegrastats` should be copied from the `nvidia` home directory to `/usr/bin` using [*cp*](manpages.ubuntu.com/manpages/xenial/man1/cp.1.html).
 - roboloco.service moved to /lib/systemd/system
 - Activate systemd changes using systemctl daemon-reload
 - Enable service on boot using systemctl enable roboloco
 - wifi-Gp.sh and wifi-lcps.sh moved to /root
-- tegrastats moved to /usr/bin
 - Code directory with active subfolder should be in roboloco home directory
-- On TX2, fix two cores being disabled by editing /etc/nvpmodel.conf and changing the default state to 2
 
 ## Software Dependencies
+---
 Following commands come from this [site](https://jkjung-avt.github.io/opencv3-on-tx2/)
 - python3.5, python3-pip, python3-dev, and python3-tk must be installed using apt
 - tmux, screen, atop, htop, and vim should be installed using apt
@@ -76,10 +85,9 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local \
 Change the -j4 to -j6 for the TX2 only, run as below for the TX1.
 ```
 make -j4
-```
-```
 sudo make install
 ```
 
-## All done
+## Finished
+---
 At this point, you can push code to the jetson of choice/setup using the existing build scripts in the main project.
