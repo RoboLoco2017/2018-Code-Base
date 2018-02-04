@@ -11,7 +11,28 @@ Thus, if you don't understand something or don't know how to procede, **ask for 
 - A user account named `roboloco` must set up on the system using [*adduser*](https://manpages.ubuntu.com/manpages/xenial/en/man8/adduser.8.html).
 - The account `roboloco` must be a member of sudo and video groups using [*usermod*](https://manpages.ubuntu.com/manpages/xenial/man8/usermod.8.html).
 - Passwords for `root`, `nvidia`, `ubuntu`, and `roboloco` must be set using [*passwd*](https://manpages.ubuntu.com/manpages/trusty/man5/passwd.5.html) based on this [link](https://goo.gl/G4gK9V).
-- IP must be changed to be a static `10.53.38.75/24` for only the wired `eth0` connection using [*nmtui*](https://manpages.ubuntu.com/manpages/xenial/en/man1/nmtui.1.html).
+- Change the hostname to something unique for the device. For example `tx1` and `tx2` have been used for the two existing Jetson modules. 
+  - Change the active and boot hostname using `nmcli g hostname <hostname>`. For example `nmcli g hostname tx2`. 
+  - Update `/etc/hosts` so `127.0.1.1` uses the new hostname. 
+    - Edit `/etc/hosts`
+    - Change `tegra-ubuntu` to the new hostname. If the hostname was previously changed the old hostname will be there instead. 
+    - For example: 
+      ```
+      127.0.0.1 localhost
+      127.0.1.1 tegra-ubuntu
+      ```
+      Should be changed to
+      ```
+      127.0.0.1 localhost
+      127.0.1.1 tx2
+      ```
+- Wired Connection 1 - Edit via [*nmtui*](https://manpages.ubuntu.com/manpages/xenial/en/man1/nmtui.1.html)
+  - IP must be changed to be a static `10.53.38.75/24` for only the wired `eth0` connection.
+  - The checkbox for `Never use this network for default route` must be checked fro the Wired Connection. 
+  - Do NOT set a default gateway for the wired connection. It must be blank or traffic for the internet will try to use the Robot network to get out. 
+  - Do not set any DNS servers for the interface. 
+  - Set IPv6 to ignore. 
+  - The checkbox `Automatically connect` MUST be checked. The checkbox `Available to all users` may be checked. 
 - (TX1 ONLY) All home directories should be set up on the external SD card using [these commands](https://help.ubuntu.com/community/Partitioning/Home/Moving).
 - (TX2 ONLY) Enable the two disabled cores by editing `/etc/nvpmodel.conf` and changing the `< PM_CONFIG DEFAULT >` line to to `< PM_CONFIG DEFAULT=0 >` using, as sudo, [*vi*](https://manpages.ubuntu.com/manpages/xenial/en/man1/vi.1posix.html).
 <!--- Check if above statement is actually true and edit to actually match the line number and provide entire line--->
@@ -86,6 +107,38 @@ Change the -j4 to -j6 for the TX2 only, then run these commands.
 make -j4
 sudo make install
 ```
+
+## SSH Key Based Authentication
+### OSX & Linux
+#### If you don't have an existing SSH key
+```
+ssh-keygen -t ed25519
+```
+- When asked for a password you can either enter a password to encrypt the key with or just press enter to not encrypt them. 
+- If you use a password you'll be asked to enter it every time the key is loaded. For instance when you add it to the SSH Agent, it'll prompt you for the password. You can use it via the agent as long as the agent runs without prompting. 
+
+#### Copy the ssh key to the Jetson
+```
+ssh-copy-id roboloco@<jetson ip>
+```
+
+#### Start the agent
+1) `ssh-agent`
+1) `ssh-add`
+
+### Windows
+#### If you don't already have an existing SSH key
+1) Install (PuTTY)[https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html]
+1) Open `PuTTY Key Generator` (aka `PuTTY Gen`)
+1) Set the key type to `SSH2-RSA`
+1) Set the key size (aka number of bits) to `4096`. You can use the default of `2048` but this key will become insecure pretty quickly. 
+1) Click `Generate`
+1) Click `Save Privatae Key` and save the key somewhere save like your `My Documents`. Do not every give out this key. 
+1) Click `Save Public Key` and save it with the private key. This key doens't need to be protected. 
+
+#### Copy the ssh key to the Jetson
+1) Copy the contents of the public key file - Use wordpad or (Notepad++)[https://notepad-plus-plus.org/] to view the file contents. Notepad might not work. 
+  1) Place the contents of the file in `/home/roboloco/.ssh/authorized_keys` on the Jetson
 
 ## Finished
 At this point, the system should be set up and all software dependencies are installed. You can push code to the Jetson of choice/setup using the existing build scripts in the main project.
