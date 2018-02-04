@@ -1,9 +1,9 @@
 ## Requirements
 
 Flash the latest L4T OS and drivers from Nvidia
-If using the orbitty carrier board, run the following instructions from the latest L4T support package (download)[connecttech.com/product/orbitty-carrier-for-nvidia-jetson-tx2-tx1/] 
+If using the orbitty carrier board, run the following instructions from the latest L4T support package [download](connecttech.com/product/orbitty-carrier-for-nvidia-jetson-tx2-tx1/)
 User named roboloco with access as a member of sudo and video groups.
-Set password for root, nvidia, ubuntu, and roboloco as (----------)[https://www.youtube.com/watch?v=dQw4w9WgXcQ].
+Set password for root, nvidia, ubuntu, and roboloco as [----------](https://www.youtube.com/watch?v=dQw4w9WgXcQ).
 SD card as a home directory for TX1, ext4 formatted, or using onboard storage on TX2.
 roboloco.service moved to /lib/systemd/system
 Activate systemd changes using systemctl daemon-reload
@@ -15,7 +15,7 @@ On TX2, fix two cores being disabled by editing /etc/nvpmodel.conf and changing 
 Change IP to a static 10.53.38.75/24 when using the wired ethernet connection using nmtui.
 
 ## Dependencies
-Following commands come from this (site)[https://jkjung-avt.github.io/opencv3-on-tx2/]
+Following commands come from this [site](https://jkjung-avt.github.io/opencv3-on-tx2/)
 python3.5, python3-pip, python3-dev, and python3-tk must be installed using apt
 tmux, screen, atop, htop, and vim should be installed using apt
 pynetworktables, matplotlib, and numpy should be installed using sudo and pip3
