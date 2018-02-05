@@ -34,7 +34,7 @@ deploy {
         target('jetson') {
             // If you are setting up, comment out the line 
             // below to prevent a error.
-            // deployJetson.execute()
+            deployJetson.execute()
             }
     }
 }
