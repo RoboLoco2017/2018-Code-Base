@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 public class Robot extends IterativeRobot
 {
 	// Creates static DriveTrain, OI, and VisionSystem objects for use elsewhere.
-	public static final DriveTrain drivetrain = new DriveTrain();
+	//public static final DriveTrain drivetrain = new DriveTrain();
 	public static final OI oi = new OI();
 	public static final VisionSystem visionsystem = new VisionSystem();
 	

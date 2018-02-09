@@ -30,6 +30,6 @@ public class VisionSystem extends Subsystem
 	public void track()
 	{
 		SmartDashboard.putBoolean("Is Connected", VisionSystem.instance.isConnected());
-		SmartDashboard.putString("Table Keys", VisionSystem.table.getKeys().toString());
+		SmartDashboard.putNumber("X Coord", VisionSystem.table.getEntry("x").getDouble(-1.0));
 	}
 }
